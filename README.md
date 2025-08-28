@@ -1,78 +1,113 @@
+
 # 🎓 Cumlaude - Universidad Rómulo Gallegos
 
-Sistema web moderno y atractivo para la **inscripción de materias** de estudiantes de Ingeniería en Informática, desarrollado con React y diseñado específicamente para la Universidad Rómulo Gallegos.
+Sistema web moderno para la **inscripción de materias** de estudiantes de Ingeniería en Informática, desarrollado con React (frontend) y Node.js + Express + MongoDB (backend).
 
 ## ✨ Características
 
-- **🔐 Sistema de Autenticación** - Login seguro con usuario y contraseña
-- **Formulario Multi-paso** - Proceso de inscripción de materias organizado en 3 pasos
-- **Selección de Materias** - Catálogo completo por semestre para Ingeniería en Informática
-- **Validación en Tiempo Real** - Verificación automática de campos requeridos
-- **Diseño Responsive** - Se adapta perfectamente a todos los dispositivos
-- **Interfaz Moderna** - Diseño atractivo con gradientes y efectos visuales
-- **Barra de Progreso** - Indicador visual del avance en el proceso
-- **Confirmación de Datos** - Resumen final antes del envío
-- **Página de Éxito** - Confirmación de inscripción exitosa
-- **Información Institucional** - Datos importantes para los estudiantes
-- **Gestión de Sesión** - Control de acceso y cierre de sesión
-
-## 🔐 Sistema de Login
-
-### **Credenciales de Acceso:**
-- **Usuario:** `estudiante`
-- **Contraseña:** `123456`
-
-### **Funcionalidades del Login:**
-- **Validación de Credenciales** - Verificación de usuario y contraseña
-- **Manejo de Errores** - Mensajes informativos para credenciales incorrectas
-- **Persistencia de Sesión** - Mantiene la sesión activa durante la inscripción
-- **Cerrar Sesión** - Botón para salir del sistema en cualquier momento
-- **Información de Usuario** - Muestra el nombre del usuario logueado
-
-### **Flujo de Autenticación:**
-1. **Pantalla de Login** - Formulario de acceso principal
-2. **Validación** - Verificación de credenciales
-3. **Acceso al Sistema** - Formulario de inscripción de materias
-4. **Gestión de Sesión** - Control de acceso y logout
+- Autenticación segura por roles (admin, estudiante, profesor)
+- Validación avanzada de inscripción de materias (prelaciones, cupos, créditos, extraordinarios, paralelos)
+- Catálogo completo de materias por semestre
+- Gestión de pensum y usuarios desde el backend
+- API RESTful para integración frontend-backend
+- Diseño responsive y moderno
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **React 18.2.0** - Biblioteca de interfaz de usuario
-- **CSS3 Moderno** - Grid, Flexbox, animaciones y efectos backdrop-filter
-- **Hooks de React** - useState para manejo de estado del formulario
-- **Diseño Responsive** - Media queries para adaptación móvil
-- **Validación HTML5** - Campos requeridos y tipos de entrada específicos
+- **Frontend:** React, Vite, CSS/SASS, Context API
+- **Backend:** Node.js, Express, MongoDB, Mongoose
+- **Herramientas:** concurrently, dotenv, ESLint, TypeScript
 
-## 📋 Funcionalidades del Sistema
+## 📁 Estructura del Proyecto
 
-### **Autenticación y Seguridad:**
-- Sistema de login con validación de credenciales
-- Control de acceso a funcionalidades del sistema
-- Gestión de sesión de usuario
-- Cerrar sesión desde cualquier pantalla
+```
+client/
+   src/
+      modules/         # Módulos por dominio (auth, academic, admin, etc.)
+      core/            # Hooks, utils, estilos globales
+      infrastructure/  # Servicios API, cache
+      assets/          # Imágenes y recursos
+      App.tsx, main.tsx
+   public/
+   package.json
 
-### **Inscripción de Materias:**
-- Formulario de datos personales del estudiante
-- Selección de semestre académico
-- Catálogo completo de materias por semestre
-- Selección múltiple de materias con checkboxes
-- Resumen y confirmación de inscripción
-- Generación de número de solicitud único
+server/
+   src/
+      app.ts           # Archivo principal del servidor
+      core/            # Lógica de dominio y aplicación
+      infrastructure/
+         persistence/
+            mongodb/
+               controllers/   # Controladores de API
+               middlewares/   # Middlewares de validación y seguridad
+               routes/        # Rutas Express
+               schemas/       # Modelos de datos (Mongoose)
+               pensumData.ts  # Datos del pensum
+               connection.ts  # Conexión a MongoDB
+   .env
+   package.json
 
+package.json (raíz)     # Script para ejecutar client y server juntos
+```
+
+## 🚀 Instalación y Ejecución
+
+### Requisitos
+- Node.js (v14 o superior)
+- MongoDB local o remoto
+
+### Instalación
+1. Clona el repositorio:
+    ```bash
+    git clone <url-del-repo>
+    ```
+2. Instala las dependencias en la raíz:
+    ```bash
+    npm install
+    ```
+
+### Ejecución en desarrollo
+Ejecuta ambos proyectos (client y server) a la vez:
+```bash
+npm run dev
+```
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:3000/api`
+
+### Variables de entorno
+Crea un archivo `.env` en la carpeta `server` con la URI de MongoDB:
+```
+MONGODB_URI=mongodb://localhost:27017/cumlaude
+```
+
+## 🔒 Validaciones y Seguridad
+
+- Límite de unidades de crédito por inscripción (21, o 25 con extra crédito)
+- Validación de prelaciones y materias paralelas
+- Cupo máximo por sección (30 alumnos)
+- Solicitud de apertura de sección (mínimo 15 estudiantes)
+- No permite inscribir materias ya aprobadas
+- Validación de extraordinarios y paralelos
+
+## 📚 Pensum de Ingeniería en Informática
+
+El pensum está modelado y gestionado desde el backend, con todos los semestres y materias, incluyendo sus códigos, créditos, horas y prelaciones.
+
+## 📝 Contribuciones
+
+Las contribuciones son bienvenidas. Abre un issue o pull request para sugerencias o mejoras.
+
+## 📄 Licencia
+
+MIT
+
+---
+
+*Desarrollado con ❤️ para la Universidad Rómulo Gallegos - Ingeniería en Informática*
 ## 🎯 Carrera: Ingeniería en Informática
 
 El sistema está diseñado específicamente para estudiantes de **Ingeniería en Informática** e incluye:
 
-### 📚 Materias por Semestre:
-- **Primer Semestre**: Matemática 1, Lógica Matemática, Inglés 1, Fundamentos para la Informática, Economía Digital, Lenguaje y Comunicación
-- **Segundo Semestre**: Algoritmo I, P.T.C, Deporte, Matemática 2, Física 1
-- **Tercer Semestre**: Matemática 3, Física 2, Algoritmo 2, M.T.I, Electiva II
-- **Cuarto Semestre**: Matemática IV, Programación III, Bases de Datos I, Arquitectura de Computadoras, Investigación de Operaciones
-- **Quinto Semestre**: Programación IV, Bases de Datos II, Redes de Computadoras I, Sistemas Operativos, Ingeniería de Software I
-- **Sexto Semestre**: Programación V, Redes de Computadoras II, Ingeniería de Software II, Inteligencia Artificial, Seminario de Investigación
-- **Séptimo Semestre**: Programación VI, Sistemas Distribuidos, Seguridad Informática, Proyecto de Grado I, Ética Profesional
-- **Octavo Semestre**: Programación VII, Proyecto de Grado II, Práctica Profesional, Seminario de Grado, Trabajo de Grado
-- **Noveno y Décimo**: Trabajo de Grado y Defensa
 
 ## 🎨 Diseño y UX
 
